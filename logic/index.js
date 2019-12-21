@@ -1,5 +1,5 @@
 const replace = (text, toReplace, withThis) => {
-  return text.split(toReplace).join(withThis);
+  // write me!
 };
 
 module.exports = replace;

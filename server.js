@@ -14,7 +14,7 @@ app.use('/', express.static(path.join(__dirname, 'public')))
 
 app.get('/docs', (req, res) => {
   const welcomeAndRoutes = {
-    message: 'Welcome to The Replacer.  These are our routes',
+    message: 'Welcome to The Replacer.  These are the routes',
     routes: app._router.stack
       .filter(r => r.route && r.route.path)
       .map(r => Object.keys(r.route.methods)
@@ -24,34 +24,25 @@ app.get('/docs', (req, res) => {
   res.json(welcomeAndRoutes);
 });
 
+// GET: '/files'
+// response: {status: 'ok', files: ['all.txt','file.txt','names.txt']}
 
-app.get('/files', async (req, res) => {
-  const fileNames = fs.readdirSync(__dirname + '/files');
-  res.json({ files: fileNames });
-});
+// POST: '/files/add/:name'
+//  body: {text: "file contents"}
+//  write a new files into ./files with the given name and contents
+// redirect -> GET: '/files'
 
-app.post('/files/add/:name', async (req, res) => {
-  const fileName = req.params.name + '.txt';
-  const fileContents = req.body.text;
-  fs.writeFileSync(__dirname + '/files/' + fileName, fileContents)
-  res.redirect('/files');
-});
+// PUT: '/files/replace/:oldFile/:newFile'
+//  body: {toReplace: "str to replace", withThis: "replacement string"}
+//  write a new files into ./files with the given name and contents
+//  note - params should not include .txt, you should add that in the route
+// failure: {status: '404', message: `no file named ${oldFile}`  }
+// success: redirect -> GET: '/files'
 
-app.put('/files/replace/:oldFile/:newFile', async (req, res) => {
-  console.log(req.body)
-  const oldFile = req.params.oldFile + '.txt';
-  const newFile = req.params.newFile + '.txt';
-  const toReplace = req.body.toReplace;
-  const withThis = req.body.withThis;
-  const oldText = fs.readFileSync(__dirname + '/files/' + oldFile, 'utf-8');
-  const newText = replace(oldText, toReplace, withThis);
-  fs.writeFileSync(__dirname + '/files/' + newFile, newText)
-  res.redirect('/files');
-});
+// GET: '/report'
+//  reads the contents from ./test/report.json and sends it
+// response: {status: 'ok', report }
 
-app.get('/report', async (req, res) => {
-  res.send(require('./test/report.json'));
-});
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Replacer is serving at http://localhost:${port}`));
