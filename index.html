@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+
+  <title>Test Report</title>
+
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <!-- https://stackoverflow.com/questions/1321878/how-to-prevent-favicon-ico-requests -->
+  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgo=">
+
+  <script>
+    window.onload = () => {
+
+      fetch('./test/report.json')
+        .then(resp => resp.json())
+        .then(report => {
+          console.log('Tests Report:', report);
+
+          const userName = window.location.origin
+            .split('https://').join('')
+            .split('http://').join('')
+            .split('.')
+            .shift();
+
+          const repoName = window.location.pathname
+            .split('/').shift();
+
+          const header = document.createElement('h2');
+          header.innerHTML = userName + "'s " + repoName + " Test Report";
+
+          const statsList = Object.keys(report.stats)
+            .map(key => {
+              const codeEl = document.createElement('code');
+              codeEl.innerHTML = key + ': ' + report.stats[key];
+              const li = document.createElement('li');
+              li.appendChild(codeEl);
+              return li;
+            })
+            .reduce((ul, li) => {
+              ul.appendChild(li);
+              return ul;
+            }, document.createElement('ul'));
+
+          const body = document.body;
+          body.appendChild(header);
+          body.appendChild(document.createTextNode('last evaluated: ' + report.evaluated));
+          body.appendChild(statsList);
+          body.appendChild(document.createElement('br'));
+          body.appendChild(document.createTextNode('(open the console for full report)'));
+
+        })
+        .catch(err => console.log(err));
+    }
+  </script>
+</head>
+
+<body>
+
+  <div id='root'></div>
+
+</body>
+
+</html>
