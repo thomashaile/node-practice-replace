@@ -25,8 +25,7 @@
             .split('.')
             .shift();
 
-          const repoName = window.location.pathname
-            .split('/').shift();
+          const repoName = window.location.pathname.split('/').join('');
 
           const header = document.createElement('h2');
           header.innerHTML = userName + "'s " + repoName + " Test Report";
