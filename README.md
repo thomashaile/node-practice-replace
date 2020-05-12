@@ -7,7 +7,6 @@ A smaller and simpler project than the last two, _almost_ a break! This is one o
 * [Learning Objectives](#learning-objectives)
 * [Getting Started](#getting-started)
   * [Running the API](#running-the-api)
-  * [Running the Frontend](#running-the-frontend)
 * [Your Task](#your-task)
   * [pass the tests](#pass-the-tests)
   * [write the CLI](#write-the-cli)
@@ -25,7 +24,6 @@ A smaller and simpler project than the last two, _almost_ a break! This is one o
 * Using `npm`: installing dependencies, running scripts
 * Understanding what "fullstack" means
 * Using branches
-* Running the Frontend & Backend separately
 
 
 ### Node.js & Express Skills
@@ -52,13 +50,13 @@ A smaller and simpler project than the last two, _almost_ a break! This is one o
 * Sending values in the Request Body
 
 
-[TOP](#do-it-yourself-wiki)
+[TOP](#index)
 
 ---
 
 ## Getting Started
 
-Before you can get started writing your routes you'll want to make sure all dependencies are installed, and to make sure the frontend and backends are operational.
+Before you can get started writing your routes you'll want to make sure all dependencies are installed.
 
 Step 0 is to clone this repo.  Then you can move on to ...
 
@@ -72,20 +70,14 @@ Step 0 is to clone this repo.  Then you can move on to ...
 #### Running the API
 
 * `npm run dev`
-* Studying in Postman:
-  1. go to `localhost:xxxx/docs` for API documentation
-  1. explore!
-* Studying in the Browser:
-  1. go to `localhost:xxx/` for the simple frontend & docs
-  1. open your console to study the API's responses
-  1. explore!
+* (this project has no frontend, use Postman for testing)
 
 #### Running the Tests
 
 * `npm run test` or `node test`
 
 
-[TOP](#do-it-yourself-wiki)
+[TOP](#index)
 
 ---
 
@@ -95,7 +87,7 @@ Step 0 is to clone this repo.  Then you can move on to ...
 
 In `./logic/index.js` write the function described by the tests in `./test`.
 
-The file `./logic/sandbox.js` is there for you to experiment and debug your function. It's best practice for the `index.js` file to contain nothing but the function.
+The file `./logic/sandbox.js` is there for you to experiment and debug your function.
 
 ### Write the CLI
 
@@ -111,12 +103,11 @@ Write the routes described in `./server.js`.  When your API works, a user can
 * get the latest test report
 
 
-[TOP](#do-it-yourself-wiki)
+[TOP](#index)
 
 ---
 
 ## Helpful Links
-
 
 
 __Debugging JS Servers In VSC__
@@ -154,21 +145,7 @@ Node.js is a JavaScript runtime environment capable of writing Web Servers and A
 
 > [Postman](https://duckduckgo.com/?q=postman+tutorials&t=brave&iax=videos&ia=videos) - an app for testing your API's without using a browser.
 
-> [JSON Server](https://github.com/typicode/json-server) - An NPM module that starts a RESTful API without you having to write a single line of code.  This can be helpful practice for getting the hang of API's and Postman without getting tripped up by bugs and errors in code you write.
-
-
 * [FCC: Node.js & Express](https://www.youtube.com/watch?v=G8uL0lFFoN0)
 
 
-[TOP](#do-it-yourself-wiki)
-
----
-
-## Contributors
-
-
-[TOP](#do-it-yourself-wiki)
-
-___
-___
-### <a href="https://hackyourfuture.be" target="_blank"><img src="https://user-images.githubusercontent.com/18554853/63941625-4c7c3d00-ca6c-11e9-9a76-8d5e3632fe70.jpg" width="100" height="100"></a>
+[TOP](#index)

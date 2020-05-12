@@ -10,20 +10,6 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-app.use('/', express.static(path.join(__dirname, 'public')))
-
-app.get('/docs', (req, res) => {
-  const welcomeAndRoutes = {
-    message: 'Welcome to The Replacer.  These are the routes',
-    routes: app._router.stack
-      .filter(r => r.route && r.route.path)
-      .map(r => Object.keys(r.route.methods)
-        .map(method => method.toUpperCase() + ': ' + r.route.path)
-      )
-  };
-  res.json(welcomeAndRoutes);
-});
-
 // GET: '/files'
 // response: {status: 'ok', files: ['all.txt','file.txt','names.txt']}
 
@@ -34,8 +20,11 @@ app.get('/docs', (req, res) => {
 
 // PUT: '/files/replace/:oldFile/:newFile'
 //  body: {toReplace: "str to replace", withThis: "replacement string"}
-//  write a new files into ./files with the given name and contents
-//  note - params should not include .txt, you should add that in the route
+//  route logic:
+//    read the old file
+//    use the replace function to create the new text
+//    write the new text to the new file name
+//  note - params should not include .txt, you should add that in the route logic
 // failure: {status: '404', message: `no file named ${oldFile}`  }
 // success: redirect -> GET: '/files'
 
