@@ -1,3 +1,49 @@
+const fs = require("fs");
+const express = require("express");
+const path = require("path");
+const replace = require("./logic/index.js");
+
+const Helper = `
+COMMANDS:
+  list
+    print all files to the console
+  command line:
+    node cli.js <File name> <String-to-replace> <new-string> <new file-name>
+      
+FLAGS:
+  -h
+    print this helpful message
+  
+`;
+const list = fs.readdirSync(path.join(__dirname, "files"));
+if (process.argv.includes("-h")) {
+    console.log(Helper);
+    process.exit(0);
+}
+
+if (process.argv.includes("list")) {
+    console.log(list);
+}
+
+const filename = process.argv[2];
+const stringToReplace = process.argv[3];
+const newString = process.argv[4];
+const newFile = process.argv[5];
+
+if (!filename || !stringToReplace || !newString || !newFile) {
+    console.log(
+        `your command should look like: node cli.js <File name> <String-to-replace> <new-string> <new file-name>`
+    );
+} else if (!list.includes(filename)) {
+    console.log(`unknown file name.. could not find file with the name.`);
+} else {
+    const FILE_PATH = path.join(__dirname, "files", filename);
+    const newFilePath = path.join(__dirname, "files", newFile);
+    const fileToRead = fs.readFileSync(`${FILE_PATH}`, "utf-8");
+    const replacedContent = replace(fileToRead, stringToReplace, newString);
+    fs.writeFileSync(newFilePath, replacedContent);
+    console.log(newFile + `...created`);
+}
 /* write a CLI interface for the "replace" function and your files
 
   command line arguments:
@@ -27,4 +73,3 @@
     log a list of all the file names in "./files"
 
 */
-
